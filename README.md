@@ -16,3 +16,8 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 - [ ] Refactor the project structure for eventual integration into AEMDesign
 - [ ] Integrate into `mvn`
 - [ ] Create a docker container for running the tests.
+
+### Usage
+On first download, initialise the project with `npm install`
+
+To run the app `node app.js`
