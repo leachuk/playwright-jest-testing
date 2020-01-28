@@ -4,6 +4,7 @@
   "description": "A skeleton repository of the Playwright automation testing framework integrated with Jest",
   "main": "index.js",
   "dependencies": {
+    "fs": "0.0.1-security",
     "playwright": "^0.9.24"
   },
   "devDependencies": {},
