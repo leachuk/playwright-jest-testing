@@ -10,10 +10,18 @@ if (!fs.existsSync(screenshotDir)){
 (async () => {
 	for (const browserType of ['chromium', 'firefox', 'webkit']) {
 		const browser = await playwright[browserType].launch();
-		const context = await browser.newContext();
-		const page = await context.newPage('http://whatsmyuseragent.org/');
+		//set deviceScaleFactor = 2 to capture highres screenshot if mac display emulation is required.
+		const context = await browser.newContext({
+			viewport: {
+				width: 1000,
+				height: 600,
+				deviceScaleFactor : 1
+			}
+		});
+		const page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
+		const element = await page.$("body > div.l-wrapper.l-wrapper--main > section");
 
-		await page.screenshot({ path: screenshotDir + `/` + `example-${browserType}.png` });
+		await element.screenshot({ path: screenshotDir + `/` + `example-${browserType}.png` });
 		await browser.close();
 	}
 })();
