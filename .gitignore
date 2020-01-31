@@ -104,6 +104,7 @@ dist
 .tern-port
 
 .idea/
+.DS_Store
 
 #app specific ignores
 screenshots
