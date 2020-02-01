@@ -10,7 +10,7 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 - [x] Create POC git repo and project
 - [x] Create initial app to take screenshots of components on AEM PageDetails showcase page
 - [ ] Integrate with ImageMagik and get screenshot comparisons generating
-- [ ] Integrate with Jest testing report framework
+- [x] Integrate with Jest testing report framework
 - [ ] Duplicate the existing AEMDesign PageDetailsScreenshot test and compare running time
 - [ ] Speed up tests by getting them to run in parrallel. See something like [puppeteer cluster](https://github.com/thomasdondorf/puppeteer-cluster) as an example.
 - [ ] Refactor the project structure for eventual integration into AEMDesign
@@ -21,3 +21,5 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 On first download, initialise the project with `npm install`
 
 To run the app `node app.js`
+
+To run Jest test for screenshot with Playwright `npm run test -- --testMatch=**/*swinburne.test*`
