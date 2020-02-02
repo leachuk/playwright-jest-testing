@@ -9,7 +9,7 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 ### ToDo task list for POC
 - [x] Create POC git repo and project
 - [x] Create initial app to take screenshots of components on AEM PageDetails showcase page
-- [ ] Integrate with ImageMagik and get screenshot comparisons generating
+- [x] Integrate screenshot comparisons
 - [x] Integrate with Jest testing report framework
 - [ ] Duplicate the existing AEMDesign PageDetailsScreenshot test and compare running time
 - [ ] Speed up tests by getting them to run in parrallel. See something like [puppeteer cluster](https://github.com/thomasdondorf/puppeteer-cluster) as an example.
