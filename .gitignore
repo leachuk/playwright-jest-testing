@@ -108,3 +108,4 @@ dist
 
 #app specific ignores
 screenshots
+jest-stare/
