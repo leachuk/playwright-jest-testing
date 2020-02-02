@@ -28,8 +28,8 @@ describe(
 
 		it('should load without error', async () => {
 			const element = await page.$("body > div.l-wrapper.l-wrapper--main > section");
-			await element.screenshot({ path: screenshotDir + `/` + `swinburnetest.png` });
-			expect(true);//temp force success
+			const image = await element.screenshot({ path: screenshotDir + `/` + `swinburnetest.png` });
+			expect(image).toMatchImageSnapshot();//temp force success
 		})
 	},
 	timeout
