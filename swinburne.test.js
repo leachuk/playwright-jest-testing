@@ -20,11 +20,11 @@ describe(
 				}
 			});
 			page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
-		}, timeout)
+		}, timeout);
 
 		afterAll(async () => {
 			await page.close()
-		})
+		});
 
 		it('should load without error', async () => {
 			const element = await page.$("body > div.l-wrapper.l-wrapper--main > section");
