@@ -1,20 +1,21 @@
 const fs = require('fs');
+const testSetup = require('./pagelist.setup')
 const timeout = 5000;
 
 describe(
-	'/ (Home Page)',
+	'/ (PageList Screenshot)',
 	() => {
 		let page;
 
 		beforeAll(async () => {
 			let browser = await global.__BROWSER__;
-			let context = await browser.newContext({
-				viewport: {
-					width: 1000,
-					height: 600,
-					deviceScaleFactor : 1
-				}
-			});
+			// let context = await browser.newContext({
+			// 	viewport: {
+			// 		width: 1000,
+			// 		height: 600,
+			// 		deviceScaleFactor : 1
+			// 	}
+			// });
 			page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
 		}, timeout);
 
