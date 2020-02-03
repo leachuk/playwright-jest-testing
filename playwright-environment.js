@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const NodeEnvironment = require('jest-environment-node');
-//const playwright = require('playwright');
 const { chromium } = require('playwright');
 const fs = require('fs');
 const os = require('os');

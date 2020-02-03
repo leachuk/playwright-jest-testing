@@ -1,9 +1,11 @@
-const timeout = 5000
+const fs = require('fs');
+const timeout = 5000;
 
 describe(
 	'/ (Home Page)',
 	() => {
 		let page;
+
 		beforeAll(async () => {
 			let browser = await global.__BROWSER__;
 			let context = await browser.newContext({
@@ -13,7 +15,7 @@ describe(
 					deviceScaleFactor : 1
 				}
 			});
-			page = await context.newPage('https://google.com')
+			page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
 		}, timeout);
 
 		afterAll(async () => {
@@ -21,14 +23,10 @@ describe(
 		});
 
 		it('should load without error', async () => {
-			let text = await page.evaluate(() => document.body.textContent)
-			expect(text).toContain('google')
-		});
-
-		it('should also load without error', async () => {
-			let text = await page.evaluate(() => document.body.textContent)
-			expect(text).not.toContain('googlefoo')
-		});
+			const element = await page.$("body > div.l-wrapper.l-wrapper--main > section");
+			const image = await element.screenshot();
+			expect(image).toMatchImageSnapshot();//temp force success
+		})
 	},
 	timeout
-);
+)

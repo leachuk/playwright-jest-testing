@@ -146,9 +146,9 @@ module.exports = {
 
   // The test environment that will be used for testing
   //testEnvironment: "node",
-  globalSetup: './setup.js',
-  globalTeardown: './teardown.js',
-  testEnvironment: './playwright_environment.js',
+  globalSetup: './global-setup.js',
+  globalTeardown: './global-teardown.js',
+  testEnvironment: './playwright-environment.js',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
