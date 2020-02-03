@@ -1,5 +1,4 @@
-const fs = require('fs');
-const testSetup = require('./pagelist.setup')
+const testConfig = require('./pagelist.setup.json')
 const timeout = 5000;
 
 describe(
@@ -9,13 +8,7 @@ describe(
 
 		beforeAll(async () => {
 			let browser = await global.__BROWSER__;
-			// let context = await browser.newContext({
-			// 	viewport: {
-			// 		width: 1000,
-			// 		height: 600,
-			// 		deviceScaleFactor : 1
-			// 	}
-			// });
+			let context = await browser.newContext(testConfig.context);
 			page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
 		}, timeout);
 
