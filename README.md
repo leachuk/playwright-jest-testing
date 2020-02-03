@@ -22,6 +22,6 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 ### Usage
 On first download, initialise the project with `npm install`
 
-To run the app `node app.js`
+To run the standalone Playwright screenshot sample `node app.js`
 
 To run Jest test for screenshot with Playwright `npm run test -- --testMatch=**/*swinburne.test*`
