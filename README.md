@@ -24,4 +24,4 @@ On first download, initialise the project with `npm install`
 
 To run the standalone Playwright screenshot sample `node app.js`
 
-To run Jest test for screenshot with Playwright `npm run test -- --testMatch=**/*swinburne.test*`
+To run Jest test for screenshot with Playwright `npm run test -- --testMatch=**/*pagelist*test*`
