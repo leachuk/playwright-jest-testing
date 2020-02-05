@@ -17,20 +17,16 @@ describe(
 			await page.close()
 		});
 
-		test('adds 1 + 2 to equal 3', () => {
-			console.log(testConfig.browserRenditions[0].label)
-			expect(3).toBe(3);
-		});
-
-		test.each([testConfig.browserRenditions])(
-			'foo=%s, bar=%s, zoo=%s',
-			(a,b,c) => {
-			console.log('a:%o ,b:%o ,c:%o',a,b,c)
+		test.each(testConfig.browserRenditions)(
+			'Rendition Test %s',
+			(rendition) => {
+			console.log('label:%s ,height:%i ,width:%i',rendition.label,rendition.height,rendition.width)
 			expect(true).toBe(true)
 		},
 		timeout
-		)
-		test.each([[1, 1, 2, {foo: "bar"}]])(
+		);
+
+		test.each([[1, 1, 2, {foo: "bar"}],[3, 3, 6, {foo: "moo"}]])(
 			'.add(%i, %i)',
 			(a, b, expected, foo) => {
 				console.log('a:%i, b:%i, expected:%i, foo:%o',a,b,expected,foo.foo)
