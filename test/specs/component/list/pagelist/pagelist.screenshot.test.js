@@ -5,40 +5,36 @@ describe(
 	'/ (PageList Screenshot)',
 	() => {
 		let page;
-		let testConfig = new DefaultTestSetup();
+		let testConfig = new DefaultTestSetup().browserRenditions;
 
 		beforeAll(async () => {
 			let browser = await global.__BROWSER__;
-			//let context = await browser.newContext(testConfig.browserContext);
-			//page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
+			//page = await browser.newPage();
+			let context = await browser.newContext(testConfig.browserContext);
+			page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
 		}, timeout);
 
 		afterAll(async () => {
 			await page.close()
 		});
 
-		test.each(testConfig.browserRenditions)(
-			'Rendition Test %s',
-			(rendition) => {
-			console.log('label:%s ,height:%i ,width:%i',rendition.label,rendition.height,rendition.width)
-			expect(true).toBe(true)
-		},
+		test.each(testConfig.map(testConfig => [testConfig[0].label, testConfig[0]]))(
+			'Rendition test for size %s',
+			async(label,rendition) => {
+				console.log('label:%s ,height:%i ,width:%i',label,rendition.height,rendition.width);
+				await page.setViewport({
+					width: rendition.width,
+					height: rendition.height
+				});
+
+				const element = await page.$("body > div.l-wrapper.l-wrapper--main > section");
+				const image = await element.screenshot();
+				expect(image).toMatchImageSnapshot();
+				expect(true).toBe(true);
+			},
 		timeout
 		);
 
-		test.each([[1, 1, 2, {foo: "bar"}],[3, 3, 6, {foo: "moo"}]])(
-			'.add(%i, %i)',
-			(a, b, expected, foo) => {
-				console.log('a:%i, b:%i, expected:%i, foo:%o',a,b,expected,foo.foo)
-				expect(a + b).toBe(expected);
-			},
-		);
-
-		// it('should load without error', async () => {
-		// 	const element = await page.$("body > div.l-wrapper.l-wrapper--main > section");
-		// 	const image = await element.screenshot();
-		// 	expect(image).toMatchImageSnapshot();
-		// })
 	},
 	timeout
 )
