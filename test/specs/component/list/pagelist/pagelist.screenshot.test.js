@@ -1,16 +1,19 @@
 const DefaultTestSetup = require('../../../../defaulttest.setup.js');
 const timeout = 5000;
+const username = require("minimist")(process.argv.slice(2))["username"];
 
 describe(
 	'/ (PageList Screenshot)',
 	() => {
 		let page;
-		let testConfig = new DefaultTestSetup().browserRenditions;
+		let browserRenditions = new DefaultTestSetup().browserRenditions;
+
+		let pagePath = "/content/swinburne-site-showcase/en/styleguide/components/page-list.html";
 
 		beforeAll(async () => {
 			let browser = await global.__BROWSER__;
 			//page = await browser.newPage();
-			let context = await browser.newContext(testConfig.browserContext);
+			let context = await browser.newContext();
 			page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
 		}, timeout);
 
@@ -18,9 +21,10 @@ describe(
 			await page.close()
 		});
 
-		test.each(testConfig.map(testConfig => [testConfig[0].label, testConfig[0]]))(
+		test.each(browserRenditions.map(browserRenditions => [browserRenditions[0].label, browserRenditions[0]]))(
 			'Rendition test for size %s',
 			async(label,rendition) => {
+				console.log("custom cli param test %s", username);
 				console.log('label:%s ,height:%i ,width:%i',label,rendition.height,rendition.width);
 				await page.setViewport({
 					width: rendition.width,
