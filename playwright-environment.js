@@ -6,6 +6,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const AEMPageUtilities = require('./test/support/AEMPageUtilities');
 
 const DIR = path.join(os.tmpdir(), 'jest_playwright_global_setup');
 
@@ -27,6 +28,8 @@ class PlaywrightEnvironment extends NodeEnvironment {
     });
     // Use connect options later to establish a connection.
     this.global.__BROWSER__ = await chromium.connect(connectOptions);
+
+    this.global.AEMPageUtils = new AEMPageUtilities();
   }
 
   async teardown() {

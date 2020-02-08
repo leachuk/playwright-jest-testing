@@ -9,7 +9,7 @@ const path = require('path');
 
 const DIR = path.join(os.tmpdir(), 'jest_playwright_global_setup');
 
-module.exports = async function () {
+module.exports = async () => {
   console.log(chalk.green('Setup Playwright'));
   const browserApp = await chromium.launchBrowserApp({ webSocket: true });
   // This global is not available inside tests but only in global teardown
