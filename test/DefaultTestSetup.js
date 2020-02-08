@@ -1,4 +1,4 @@
-class AEMTestUtilities {
+class DefaultTestSetup {
   constructor() {
     this.browser = {
       renditions: [
@@ -29,4 +29,4 @@ class AEMTestUtilities {
   }
 }
 
-module.exports = AEMTestUtilities;
+module.exports = DefaultTestSetup;
