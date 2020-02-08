@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 const { username } = require('minimist')(process.argv.slice(2));
-const DefaultTestSetup = require('../../../../defaulttest.setup.js');
+const DefaultTestSetup = require('../../../../DefaultTestSetup.js');
 
 const timeout = 5000;
 
