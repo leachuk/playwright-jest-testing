@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 const fs = require('fs');
 
@@ -30,7 +31,7 @@ describe(
 
     it('should load without error', async () => {
       const element = await page.$('body > div.l-wrapper.l-wrapper--main > section');
-      const image = await element.screenshot({ path: `${screenshotDir}/` + 'swinburnetest.png' });
+      const image = await element.screenshot({ path: `${screenshotDir}/swinburnetest.png` });
       expect(image).toMatchImageSnapshot();// temp force success
     });
   },

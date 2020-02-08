@@ -25,7 +25,7 @@ describe(
       await page.close();
     });
 
-    test.each(browserRenditions.map((browserRenditions) => [browserRenditions[0].label, browserRenditions[0]]))(
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
       'Rendition test for size %s',
       async (label, rendition) => {
         console.log('custom cli param test %s', username);
