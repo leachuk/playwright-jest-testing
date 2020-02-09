@@ -14,21 +14,23 @@ describe(
     let testpage;
     const { browserRenditions } = new DefaultTestSetup();
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
-    const fullSwinPath = 'https://www.swinburne.edu.au/study/life/why-choose-swinburne/';
     const swinPath = '/study/life/why-choose-swinburne/';
     // const aemUtils = new AEMPageUtilities(swinPath);
 
     beforeAll(async () => {
       const browser = await global.__BROWSER__;
-      const context = await browser.newContext();
+      const aemUtils = new AEMPageUtilities(browser, swinPath);
       // const path = await aemUtils.getPath();
-      page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
-
+      // page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
+      aemUtils.scheme = 'https';
+      aemUtils.hostname = 'www.swinburne.edu.au';
+      page = await aemUtils.getPage();
       // const aemUtils = await global.AEMPageUtils;
-      const aemUtils = new AEMPageUtilities();
-      aemUtils.setPath('/foo');
+      // const aemUtils = new AEMPageUtilities();
+      // aemUtils.setPath('/foo');
       console.log('AEMUtils');
       console.log(aemUtils.getPath());
+      console.log(aemUtils.isWcmModeDisabled);
     }, timeout);
 
     afterAll(async () => {
