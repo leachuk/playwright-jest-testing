@@ -23,9 +23,10 @@ describe(
       // const path = await aemUtils.getPath();
       page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
 
-      const aemUtils = global.AEMPageUtils();
-      aemUtils.setPage('/foo/bar');
-      console.log('AEMUtils getPath(): %s', aemUtils.getPath());
+      const aemUtils = await global.AEMPageUtils;
+      aemUtils.setPath('/foo');
+      console.log('AEMUtils');
+      console.log(aemUtils.getPath());
     }, timeout);
 
     afterAll(async () => {

@@ -28,7 +28,6 @@ class PlaywrightEnvironment extends NodeEnvironment {
     });
     // Use connect options later to establish a connection.
     this.global.__BROWSER__ = await chromium.connect(connectOptions);
-
     this.global.AEMPageUtils = new AEMPageUtilities();
   }
 

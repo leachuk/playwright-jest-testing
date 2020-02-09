@@ -1,21 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 class AEMPageUtilities {
-  constructor(path) {
+  constructor() {
+    this.path = 'barr';
+  }
+
+  setPath(path) {
     this.path = path;
   }
 
-  /**
-   * @param {string} path
-   */
-  set setPath(path) {
-    this.path = path;
-  }
-
-  get getPath() {
+  getPath() {
     return this.setupPath();
   }
 
-  async setupPath() {
+  setupPath() {
     return 'https://www.swinburne.edu.au' + this.path;
   }
 }
