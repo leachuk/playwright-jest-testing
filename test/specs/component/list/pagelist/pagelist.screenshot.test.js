@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 const { username } = require('minimist')(process.argv.slice(2));
 const DefaultTestSetup = require('../../../../DefaultTestSetup');
+const AEMPageUtilities = require('../../../../support/AEMPageUtilities');
 
 const timeout = 5000;
 
@@ -15,7 +16,7 @@ describe(
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
     const fullSwinPath = 'https://www.swinburne.edu.au/study/life/why-choose-swinburne/';
     const swinPath = '/study/life/why-choose-swinburne/';
-    //const aemUtils = new AEMPageUtilities(swinPath);
+    // const aemUtils = new AEMPageUtilities(swinPath);
 
     beforeAll(async () => {
       const browser = await global.__BROWSER__;
@@ -23,7 +24,8 @@ describe(
       // const path = await aemUtils.getPath();
       page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
 
-      const aemUtils = await global.AEMPageUtils;
+      // const aemUtils = await global.AEMPageUtils;
+      const aemUtils = new AEMPageUtilities();
       aemUtils.setPath('/foo');
       console.log('AEMUtils');
       console.log(aemUtils.getPath());
