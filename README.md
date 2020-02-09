@@ -11,6 +11,7 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 - [x] Create initial app to take screenshots of components on AEM PageDetails showcase page
 - [x] Integrate screenshot comparisons
 - [x] Integrate with Jest testing report framework
+- [ ] Handle AEM specific requirements like setting `wcmmode=disabled` and login to author instances.
 - [ ] Duplicate the existing AEMDesign PageDetailsScreenshot test and compare running time
 - [ ] Speed up tests by getting them to run in parrallel. See something like [puppeteer cluster](https://github.com/thomasdondorf/puppeteer-cluster) as an example.
 - [ ] Convert to yarn from npm.
