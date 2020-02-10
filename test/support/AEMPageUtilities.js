@@ -93,27 +93,49 @@ class AEMPageUtilities {
     return this.setupPath();
   }
 
-  setupPath() {
-    let url = `${this.scheme}://${this.hostname}${this.path}`;
+  setupHostname() {
+    let hostname = `${this.scheme}://${this.hostname}`;
     if (typeof this.port !== 'undefined') {
-      url = `${this.scheme}://${this.hostname}:${this.port}${this.path}`;
+      hostname = `${this.scheme}://${this.hostname}:${this.port}`;
     }
+
+    return hostname;
+  }
+
+  setupPath() {
+    let url = this.setupHostname();
     if (typeof this.isWcmModeDisabled !== 'undefined' && this.isWcmModeDisabled === true) {
       url = `${url}?wcmmode=disabled`;
     }
-    return url;
+    return `${url}${this.path}`;
   }
 
   async getPage() {
-    if (typeof this.isAuthor !== 'undefined') {
+    if (typeof this.isAuthor !== 'undefined' && this.isAuthor === true) {
       console.log('handle AEM login');
+
+      let loginUrl = '';
       // todo: need to handle authenticating to author instance via form
       // trying with basic auth in the url redirects to the login page
+      if (typeof this.port !== 'undefined') {
+        loginUrl = `${this.scheme}://${this.hostname}:${this.port}/libs/granite/core/content/login.html`;
+      } else {
+        loginUrl = `${this.scheme}://${this.hostname}/libs/granite/core/content/login.html`;
+      }
+      const loginPage = await this.context.newPage(loginUrl);
+      await loginPage.type('#username', this.username);
+      await loginPage.type('#password', this.password);
+      await loginPage.click('submit-button');
     }
 
     this.context = await this.browser.newContext();
     // const path = await aemUtils.getPath();
     const page = await this.context.newPage(this.setupPath());
+    // const found = await page.$('text="Welcome to Adobe Experience Manager"');
+    const found = await page.content();
+    await page.screenshot({ path: 'loginscreenshot.png' });
+    console.log('found %s', found.includes('QUICKSTART_HOMEPAGE'));
+
     return page;
   }
 }

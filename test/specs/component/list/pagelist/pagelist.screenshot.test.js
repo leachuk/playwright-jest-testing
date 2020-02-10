@@ -14,23 +14,26 @@ describe(
     let testpage;
     const { browserRenditions } = new DefaultTestSetup();
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
+    const aemSelector = '#contentblock4';
     const swinPath = '/study/life/why-choose-swinburne/';
+    const swinSelector = 'body > div.l-wrapper.l-wrapper--main > section';
     // const aemUtils = new AEMPageUtilities(swinPath);
 
     beforeAll(async () => {
       const browser = await global.__BROWSER__;
-      const aemUtils = new AEMPageUtilities(browser, swinPath);
+      const aemUtils = new AEMPageUtilities(browser, pagePath);
       // const path = await aemUtils.getPath();
       // page = await context.newPage('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
-      aemUtils.scheme = 'https';
-      aemUtils.hostname = 'www.swinburne.edu.au';
+      aemUtils.scheme = 'http';
+      aemUtils.hostname = 'localhost';
+      aemUtils.port = '4502';
       page = await aemUtils.getPage();
       // const aemUtils = await global.AEMPageUtils;
       // const aemUtils = new AEMPageUtilities();
       // aemUtils.setPath('/foo');
       console.log('AEMUtils');
       console.log(aemUtils.getPath());
-      console.log(aemUtils.isWcmModeDisabled);
+      // console.log(page);
     }, timeout);
 
     afterAll(async () => {
@@ -47,9 +50,10 @@ describe(
           height: rendition.height,
         });
 
-        const element = await page.$('body > div.l-wrapper.l-wrapper--main > section');
-        const image = await element.screenshot();
-        expect(image).toMatchImageSnapshot();
+        // const element = await page.$(aemSelector);
+        // const image = await element.screenshot();
+        await page.screenshot({path: 'screenshot.png'});
+        // expect(image).toMatchImageSnapshot();
         expect(true).toBe(true);
       },
       timeout,
