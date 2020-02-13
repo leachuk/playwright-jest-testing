@@ -8,6 +8,7 @@ const options = {
     hostname: 'localhost',
     username: 'admin',
     password: 'admin',
+    isWcmModeDisabled: true,
   },
 };
 const args = require('minimist')(process.argv.slice(2), options);
@@ -98,22 +99,35 @@ class AEMPageUtilities {
     if (typeof this.port !== 'undefined') {
       hostname = `${this.scheme}://${this.hostname}:${this.port}`;
     }
-
     return hostname;
   }
 
   setupPath() {
-    let url = this.setupHostname();
+    const url = this.setupHostname();
+    console.log(`this.isWcmModeDisabled:${this.isWcmModeDisabled}`);
     if (typeof this.isWcmModeDisabled !== 'undefined' && this.isWcmModeDisabled === true) {
-      url = `${url}?wcmmode=disabled`;
+      return `${url}${this.path}?wcmmode=disabled`;
     }
     return `${url}${this.path}`;
   }
 
-  async getPage() {
-    if (typeof this.isAuthor !== 'undefined' && this.isAuthor === true) {
-      console.log('handle AEM login');
+  async isAemLogin(page) {
+    const found = await page.content();
+    if (found.includes('QUICKSTART_HOMEPAGE')) {
+      console.log('isAemLogin true');
+      return true;
+    }
+    console.log('isAemLogin false');
+    return false;
+  }
 
+  async getPage() {
+    this.context = await this.browser.newContext();
+    // const path = await aemUtils.getPath();
+    const page = await this.context.newPage(this.setupPath());
+    console.log(`page.url():${page.url()}`);
+    // const found = await page.$('text="Welcome to Adobe Experience Manager"');
+    if (await this.isAemLogin(page)) {
       let loginUrl = '';
       // todo: need to handle authenticating to author instance via form
       // trying with basic auth in the url redirects to the login page
@@ -122,20 +136,22 @@ class AEMPageUtilities {
       } else {
         loginUrl = `${this.scheme}://${this.hostname}/libs/granite/core/content/login.html`;
       }
-      const loginPage = await this.context.newPage(loginUrl);
-      await loginPage.type('#username', this.username);
-      await loginPage.type('#password', this.password);
-      await loginPage.click('submit-button');
+      console.log(`loginUrl:${loginUrl}`);
+      // const loginPage = await this.context.newPage(loginUrl);
+      console.log('got loginPage');
+      await page.screenshot({ path: './preloginscreenshot.png' });
+      await page.type('#username', this.username);
+      await page.type('#password', this.password);
+      await page.screenshot({ path: './pre2loginscreenshot.png' });
+      await page.click('#submit-button');
+      // await page.$eval('#submit-button', (elem) => elem.click());
+      console.log('clicked loginPage');
+      await page.screenshot({ path: './pre3loginscreenshot.png' });
+      console.log(`setupPath:${this.setupPath()}`);
+      await page.screenshot({ path: './postloginscreenshot.png' });
+      return page;
     }
-
-    this.context = await this.browser.newContext();
-    // const path = await aemUtils.getPath();
-    const page = await this.context.newPage(this.setupPath());
-    // const found = await page.$('text="Welcome to Adobe Experience Manager"');
-    const found = await page.content();
-    await page.screenshot({ path: 'loginscreenshot.png' });
-    console.log('found %s', found.includes('QUICKSTART_HOMEPAGE'));
-
+    await page.screenshot({ path: 'standardscreenshot.png' });
     return page;
   }
 }
