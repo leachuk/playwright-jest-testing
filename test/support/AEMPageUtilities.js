@@ -143,8 +143,10 @@ class AEMPageUtilities {
       await page.type('#username', this.username);
       await page.type('#password', this.password);
       // await page.screenshot({ path: './pre2loginscreenshot.png' });
-      await page.click('#submit-button');
-      // await page.$eval('#submit-button', (elem) => elem.click());
+      await Promise.all([
+        page.click('#submit-button'),
+        page.waitForNavigation({ waitUntil: 'load' }),
+      ]);
       console.log('clicked loginPage');
       // await page.screenshot({ path: './pre3loginscreenshot.png' });
       console.log(`setupPath:${this.setupPath()}`);
