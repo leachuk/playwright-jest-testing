@@ -151,7 +151,7 @@ class AEMPageUtilities {
       // await page.screenshot({ path: './postloginscreenshot.png' });
       return page;
     }
-    await page.screenshot({ path: 'standardscreenshot.png' });
+    // await page.screenshot({ path: 'standardscreenshot.png' });
     return page;
   }
 }
