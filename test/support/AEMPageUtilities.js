@@ -139,16 +139,16 @@ class AEMPageUtilities {
       console.log(`loginUrl:${loginUrl}`);
       // const loginPage = await this.context.newPage(loginUrl);
       console.log('got loginPage');
-      await page.screenshot({ path: './preloginscreenshot.png' });
+      // await page.screenshot({ path: './preloginscreenshot.png' });
       await page.type('#username', this.username);
       await page.type('#password', this.password);
-      await page.screenshot({ path: './pre2loginscreenshot.png' });
+      // await page.screenshot({ path: './pre2loginscreenshot.png' });
       await page.click('#submit-button');
       // await page.$eval('#submit-button', (elem) => elem.click());
       console.log('clicked loginPage');
-      await page.screenshot({ path: './pre3loginscreenshot.png' });
+      // await page.screenshot({ path: './pre3loginscreenshot.png' });
       console.log(`setupPath:${this.setupPath()}`);
-      await page.screenshot({ path: './postloginscreenshot.png' });
+      // await page.screenshot({ path: './postloginscreenshot.png' });
       return page;
     }
     await page.screenshot({ path: 'standardscreenshot.png' });
