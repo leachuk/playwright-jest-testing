@@ -14,7 +14,6 @@ describe(
 
     const { browserRenditions } = new DefaultTestSetup();
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
-    const aemSelector = '#contentblock4';
 
     beforeAll(async () => {
       const browser = await global.__BROWSER__;
@@ -28,16 +27,407 @@ describe(
     });
 
     test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-      'Rendition test for size %s',
+      'Appearance of Page List with badge Icon in %s',
       async (label, rendition) => {
-        console.log('custom cli param test %s', username);
         console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#social-links';
         await page.setViewport({
           width: rendition.width,
           height: rendition.height,
         });
 
-        const element = await page.$(aemSelector);
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Default in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_AIQY5ZRKO #pagelist_default_links';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : default background in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_OXHFFXJJE #pagelist_36a';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : default background with charcoal theme in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_1XHFFXJJE #pagelist_36b';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : grey background in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_2XHFFXJJE #pagelist_36a';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : yellow background in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_4XHFFXJJE #pagelist_36a';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : grey background with charcoal theme in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_5XHFFXJJE #pagelist_36b';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Default : Horizontal links in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#reference_COQK8HAL9 #pagelist37';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Page details with Image, Title, Description and Action in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#contentblock_pagelist_pagedetails_badge_image_title_desc_action_pagelist';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Image, Title, Description and Action : Column in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_column';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Image, Title, Description and Action : Column 3 in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_column_3';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Image, Sub Title, Title, Description and Action in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#contentblock_pagelist_pagedetails_card_background_pagelist';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of 1 notification in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_notification_1';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of 2 notifications in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_notification_2';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of 3 notifications in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_notification_3';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List Testimonial Card with Online Media in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_online_media';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List Testimonial Card with Online Media and Custom Image in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_online_media_custom_image';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#card_title_subtitle_description_action';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List Testimonial Card with Image in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_image';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List Testimonial Card with Subtitle in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_text_only';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List Testimonial Card without Subtitle in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_text_only_without_subtitle';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Clickable cards with icon and title in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_pagedetails_clickable_card_icon_title';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#card_title_subtitle_description_action';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
+
+    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+      'Appearance of cards with action default with arrow in %s',
+      async (label, rendition) => {
+        console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_action_default_with_arrow';
+        await page.setViewport({
+          width: rendition.width,
+          height: rendition.height,
+        });
+
+        const element = await page.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
