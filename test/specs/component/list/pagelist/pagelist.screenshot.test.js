@@ -20,9 +20,6 @@ describe(
       const browser = await global.__BROWSER__;
       const aemUtils = new AEMPageUtilities(browser, pagePath);
 
-      aemUtils.scheme = 'http';
-      aemUtils.hostname = 'localhost';
-      aemUtils.port = '4502';
       page = await aemUtils.getPage();
     }, timeout);
 
