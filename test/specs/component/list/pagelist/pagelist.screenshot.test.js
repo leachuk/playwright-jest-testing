@@ -230,18 +230,22 @@ describe(
       timeout,
     );
 
-    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+    test.only.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
       'Appearance of 1 notification in %s',
       async (label, rendition) => {
         console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
         const cssSelector = '#pagelist_notification_1';
+        const bodyHandle = await page.$('body');
+        const boundingBox = await bodyHandle.boundingBox();
         await page.setViewport({
-          width: rendition.width,
-          height: rendition.height,
+          width: Math.max(rendition.width, Math.ceil(boundingBox.width)),
+          height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
         });
 
         const element = await page.$(cssSelector);
         const image = await element.screenshot();
+        // debug screenshot
+        await element.screenshot({ path: `./pagelist_notification_1_${label}.png` });
         expect(image).toMatchImageSnapshot();
       },
       timeout,
