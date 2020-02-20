@@ -22,30 +22,30 @@ class PlaywrightEnvironment extends NodeEnvironment {
       throw new Error('wsEndpoint not found');
     }
     const chromiumBrowserApp = await playwright.chromium.launchBrowserApp({ webSocket: true });
-    const firefoxBrowserApp = await playwright.firefox.launchBrowserApp({ webSocket: true });
-    const webkitBrowserApp = await playwright.webkit.launchBrowserApp({ webSocket: true });
+    // const firefoxBrowserApp = await playwright.firefox.launchBrowserApp({ webSocket: true });
+    // const webkitBrowserApp = await playwright.webkit.launchBrowserApp({ webSocket: true });
 
     const chromiumConnectOptions = chromiumBrowserApp.connectOptions({
       browserWSEndpoint: wsEndpoint,
     });
-    const firefoxConnectOptions = firefoxBrowserApp.connectOptions({
-      browserWSEndpoint: wsEndpoint,
-    });
-    const webkitConnectOptions = webkitBrowserApp.connectOptions({
-      browserWSEndpoint: wsEndpoint,
-    });
+    // const firefoxConnectOptions = firefoxBrowserApp.connectOptions({
+    //   browserWSEndpoint: wsEndpoint,
+    // });
+    // const webkitConnectOptions = webkitBrowserApp.connectOptions({
+    //   browserWSEndpoint: wsEndpoint,
+    // });
 
     // Use connect options later to establish a connection.
     this.global.__CHROMIUMBROWSER__ = await playwright.chromium.connect(chromiumConnectOptions);
-    this.global.__FIREFOXBROWSER__ = await playwright.firefox.connect(firefoxConnectOptions);
-    this.global.__WEBKITBROWSER__ = await playwright.webkit.connect(webkitConnectOptions);
+    // this.global.__FIREFOXBROWSER__ = await playwright.firefox.connect(firefoxConnectOptions);
+    // this.global.__WEBKITBROWSER__ = await playwright.webkit.connect(webkitConnectOptions);
   }
 
   async teardown() {
     console.log(chalk.yellow('Teardown Test Environment.'));
     this.global.__CHROMIUMBROWSER__.close();
-    this.global.__FIREFOXBROWSER__.close();
-    this.global.__WEBKITBROWSER__.close();
+    // this.global.__FIREFOXBROWSER__.close();
+    // this.global.__WEBKITBROWSER__.close();
     await super.teardown();
   }
 
