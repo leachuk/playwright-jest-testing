@@ -111,7 +111,17 @@ class AEMPageUtilities {
     return `${url}${this.path}`;
   }
 
-  async isAemLogin(page) {
+  static async setViewportSize(page, rendition) {
+    const bodyHandle = await page.$('body');
+    const boundingBox = await bodyHandle.boundingBox();
+    await page.setViewport({
+      width: Math.max(rendition.width, Math.ceil(boundingBox.width)),
+      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
+    });
+    return page;
+  }
+
+  static async isAemLogin(page) {
     const found = await page.content();
     if (found.includes('QUICKSTART_HOMEPAGE')) {
       console.log('isAemLogin true');
@@ -127,7 +137,7 @@ class AEMPageUtilities {
     const page = await this.context.newPage(this.setupPath());
     console.log(`page.url():${page.url()}`);
     // const found = await page.$('text="Welcome to Adobe Experience Manager"');
-    if (await this.isAemLogin(page)) {
+    if (await AEMPageUtilities.isAemLogin(page)) {
       let loginUrl = '';
       // todo: need to handle authenticating to author instance via form
       // trying with basic auth in the url redirects to the login page
