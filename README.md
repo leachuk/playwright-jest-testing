@@ -29,4 +29,4 @@ To run the standalone Playwright screenshot sample `node app.js`
 To run Jest test for screenshot with Playwright.
 Npm: `npm run test -- --testMatch=**/*pagelist*test* --scheme=http --hostname=localhost --port=4502 --username=admin --password=admin --isWcmModeDisabled=true`
 
-Yarn: `yarn test -- --testMatch=**/*pagelist*test* --scheme=http --hostname=localhost --port=4502 --username=admin --password=admin --isWcmModeDisabled=true`
+Yarn: `yarn test --testMatch=**/*pagelist*test* --scheme=http --hostname=localhost --port=4502 --username=admin --password=admin --isWcmModeDisabled=true`

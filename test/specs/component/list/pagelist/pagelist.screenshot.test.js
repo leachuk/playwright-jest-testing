@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
-const { username } = require('minimist')(process.argv.slice(2));
 const DefaultTestSetup = require('../../../../DefaultTestSetup');
 const AEMPageUtilities = require('../../../../support/AEMPageUtilities');
 
