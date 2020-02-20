@@ -13,8 +13,9 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 - [x] Integrate with Jest testing report framework
 - [x] Handle AEM specific requirements like setting `wcmmode=disabled` and login to author instances.
 - [x] Duplicate the existing AEMDesign PageDetailsScreenshot test and compare running time
+- [ ] Add ability to test with multi browser types (chromium, firefox or webkit)
 - [ ] Speed up tests by getting them to run in parrallel. See something like [puppeteer cluster](https://github.com/thomasdondorf/puppeteer-cluster) as an example.
-- [ ] Convert to yarn from npm.
+- [x] Convert to yarn from npm.
 - [ ] Integrate Jests snapshots to test html structure of components. This will remove the need to write tests looking for specific node structures.
 - [ ] Refactor the project structure for eventual integration into AEMDesign
 - [ ] Integrate into `mvn`
@@ -25,4 +26,7 @@ On first download, initialise the project with `npm install`
 
 To run the standalone Playwright screenshot sample `node app.js`
 
-To run Jest test for screenshot with Playwright `npm run test -- --testMatch=**/*pagelist*test* --scheme=http --hostname=localhost --port=4502 --username=admin --password=admin --isWcmModeDisabled=true`
+To run Jest test for screenshot with Playwright.
+Npm: `npm run test -- --testMatch=**/*pagelist*test* --scheme=http --hostname=localhost --port=4502 --username=admin --password=admin --isWcmModeDisabled=true`
+
+Yarn: `yarn test -- --testMatch=**/*pagelist*test* --scheme=http --hostname=localhost --port=4502 --username=admin --password=admin --isWcmModeDisabled=true`
