@@ -16,7 +16,7 @@ describe(
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
 
     beforeAll(async () => {
-      const browser = await global.__BROWSER__;
+      const browser = await global.__CHROMIUMBROWSER__;
       aemUtils = new AEMPageUtilities(browser, pagePath);
 
       page = await aemUtils.getPage();
@@ -26,7 +26,7 @@ describe(
       await page.close();
     });
 
-    test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
+    test.only.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
       'Appearance of Page List with badge Icon in %s',
       async (label, rendition) => {
         console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
