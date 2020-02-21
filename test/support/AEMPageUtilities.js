@@ -112,12 +112,14 @@ class AEMPageUtilities {
   }
 
   static async setViewportSize(page, rendition) {
-    await page.screenshot({ path: 'debugPageScreenshot.png'});
     const bodyHandle = await page.$wait('body');
     const boundingBox = await bodyHandle.boundingBox();
+    console.log('bounding box');
+    console.log(boundingBox);
+    console.log(`resized width:${Math.max(rendition.width, Math.ceil(boundingBox.width))}, resized height:${Math.max(rendition.height, Math.ceil(boundingBox.height))}`);
     await page.setViewportSize({
-      width: Math.max(rendition.width, Math.ceil(boundingBox.width)),
-      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
+      width: rendition.width,
+      height: Math.ceil(boundingBox.height),
     });
     return page;
   }
