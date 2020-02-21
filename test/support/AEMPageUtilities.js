@@ -111,16 +111,6 @@ class AEMPageUtilities {
     return `${url}${this.path}`;
   }
 
-  static async setViewportSize(page, rendition) {
-    const bodyHandle = await page.$('body');
-    const boundingBox = await bodyHandle.boundingBox();
-    await page.setViewport({
-      width: Math.max(rendition.width, Math.ceil(boundingBox.width)),
-      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
-    });
-    return page;
-  }
-
   static async isAemLogin(page) {
     const found = await page.content();
     if (found.includes('QUICKSTART_HOMEPAGE')) {
@@ -134,8 +124,10 @@ class AEMPageUtilities {
   async getPage() {
     this.context = await this.browser.newContext();
     // const path = await aemUtils.getPath();
-    const page = await this.context.newPage(this.setupPath());
+    const page = await this.context.newPage();
+    await page.goto(this.setupPath());
     console.log(`page.url():${page.url()}`);
+    //page.screenshot({ path: 'testingScreenshot.png' });
     // const found = await page.$('text="Welcome to Adobe Experience Manager"');
     if (await AEMPageUtilities.isAemLogin(page)) {
       let loginUrl = '';
@@ -152,16 +144,21 @@ class AEMPageUtilities {
       // await page.screenshot({ path: './preloginscreenshot.png' });
       await page.type('#username', this.username);
       await page.type('#password', this.password);
-      // await page.screenshot({ path: './pre2loginscreenshot.png' });
-      await Promise.all([
-        page.click('#submit-button'),
-        page.waitForNavigation({ waitUntil: 'load' }),
-      ]);
+      await page.screenshot({ path: './pre1loginscreenshot.png' });
+      await page.click('#submit-button');
+      // await page.waitForNavigation({ waitUntil: 'load' });
       console.log('clicked loginPage');
+      await page.screenshot({ path: './pre2loginscreenshot.png' });
+      // await Promise.all([
+      //   page.click('#submit-button'),
+      //   page.waitForNavigation({ waitUntil: 'load' }),
+      //   console.log('clicked loginPage'),
+      //   page.screenshot({ path: './pre2loginscreenshot.png' }),
+      // ]);
       // await page.screenshot({ path: './pre3loginscreenshot.png' });
       console.log(`setupPath:${this.setupPath()}`);
       // await page.screenshot({ path: './postloginscreenshot.png' });
-      return page;
+      // return page;
     }
     // await page.screenshot({ path: 'standardscreenshot.png' });
     return page;

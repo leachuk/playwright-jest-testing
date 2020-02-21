@@ -9,7 +9,7 @@
     "jest-environment-node": "^25.1.0",
     "minimist": "^1.2.0",
     "mkdirp": "^1.0.3",
-    "playwright": "^0.9.24",
+    "playwright": "^0.11.1",
     "rimraf": "^3.0.1"
   },
   "devDependencies": {
