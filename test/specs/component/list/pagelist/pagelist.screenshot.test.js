@@ -33,11 +33,8 @@ describe(
         console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
         const cssSelector = '#social-links';
 
-        page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedElement = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedElement.$wait(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },

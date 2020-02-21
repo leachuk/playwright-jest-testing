@@ -111,6 +111,17 @@ class AEMPageUtilities {
     return `${url}${this.path}`;
   }
 
+  static async setViewportSize(page, rendition) {
+    await page.screenshot({ path: 'debugPageScreenshot.png'});
+    const bodyHandle = await page.$wait('body');
+    const boundingBox = await bodyHandle.boundingBox();
+    await page.setViewportSize({
+      width: Math.max(rendition.width, Math.ceil(boundingBox.width)),
+      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
+    });
+    return page;
+  }
+
   static async isAemLogin(page) {
     const found = await page.content();
     if (found.includes('QUICKSTART_HOMEPAGE')) {
@@ -127,7 +138,7 @@ class AEMPageUtilities {
     const page = await this.context.newPage();
     await page.goto(this.setupPath());
     console.log(`page.url():${page.url()}`);
-    //page.screenshot({ path: 'testingScreenshot.png' });
+    // page.screenshot({ path: 'testingScreenshot.png' });
     // const found = await page.$('text="Welcome to Adobe Experience Manager"');
     if (await AEMPageUtilities.isAemLogin(page)) {
       let loginUrl = '';
@@ -144,11 +155,11 @@ class AEMPageUtilities {
       // await page.screenshot({ path: './preloginscreenshot.png' });
       await page.type('#username', this.username);
       await page.type('#password', this.password);
-      await page.screenshot({ path: './pre1loginscreenshot.png' });
+      // await page.screenshot({ path: './pre1loginscreenshot.png' });
       await page.click('#submit-button');
       // await page.waitForNavigation({ waitUntil: 'load' });
       console.log('clicked loginPage');
-      await page.screenshot({ path: './pre2loginscreenshot.png' });
+      // await page.screenshot({ path: './pre2loginscreenshot.png' });
       // await Promise.all([
       //   page.click('#submit-button'),
       //   page.waitForNavigation({ waitUntil: 'load' }),
