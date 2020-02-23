@@ -22,27 +22,12 @@ describe(
         { browserName: 'chromium', browser: browserChromium, page: null },
         { browserName: 'firefox', browser: browserFirefox, page: null },
       ];
-      // const browsers = [
-      //   { browserName: 'chromium', browserType: 'foo' },
-      //   { browserName: 'firefox', browserType: 'bar' },
-      // ];
-      // var result = browsers.filter(x => x.browserName === "chromium");
-      // console.log(result);
 
-      // for (const index in browsers) {
-      //   const key = Object.keys(browsers[index]);
-      //   console.log(`browser(${index}) [${key}], isConnected: ${browsers[index][Object.keys(browsers[index])].browserType.isConnected()}`);
-      // }
-      // // const browser = await global.__FIREFOXBROWSER__;
       aemUtils = await new AEMPageUtilities(browsers, pagePath);
-      // console.log(aemUtils.browsers);
-
       // for (const index in aemUtils.browsers) {
       //   let browser = browsers[index];
       //   console.log(browser);
       // }
-
-      //page = await aemUtils.getPage();
     }, timeout);
 
     afterAll(async () => {
