@@ -2,10 +2,10 @@ class DefaultTestSetup {
   constructor() {
     this.browser = {
       renditions: [
-        [{ label: 'SM', browserType: 'chromium', width: 320, height: 480 }],
-        [{ label: 'MD', browserType: 'chromium', width: 640, height: 768 }],
-        [{ label: 'LG', browserType: 'chromium', width: 1024, height: 768 }],
-        [{ label: 'XLG', browserType: 'chromium', width: 1366, height: 1280 }],
+        [{ label: 'SM', browserName: 'chromium', width: 320, height: 480 }],
+        [{ label: 'MD', browserName: 'chromium', width: 640, height: 768 }],
+        [{ label: 'LG', browserName: 'chromium', width: 1024, height: 768 }],
+        [{ label: 'XLG', browserName: 'chromium', width: 1366, height: 1280 }],
       ],
     };
 

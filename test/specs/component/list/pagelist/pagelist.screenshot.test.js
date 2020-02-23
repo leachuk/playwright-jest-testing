@@ -10,6 +10,7 @@ describe(
   '/ (PageList Screenshot)',
   () => {
     let page;
+    let aemUtils;
 
     const { browserRenditions } = new DefaultTestSetup();
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
@@ -18,8 +19,8 @@ describe(
       const browserChromium = await global.__CHROMIUMBROWSER__;
       const browserFirefox = await global.__FIREFOXBROWSER__;
       const browsers = [
-        { browserName: 'chromium', browserType: browserChromium },
-        { browserName: 'firefox', browserType: browserFirefox },
+        { browserName: 'chromium', browser: browserChromium, page: null },
+        { browserName: 'firefox', browser: browserFirefox, page: null },
       ];
       // const browsers = [
       //   { browserName: 'chromium', browserType: 'foo' },
@@ -33,8 +34,8 @@ describe(
       //   console.log(`browser(${index}) [${key}], isConnected: ${browsers[index][Object.keys(browsers[index])].browserType.isConnected()}`);
       // }
       // // const browser = await global.__FIREFOXBROWSER__;
-      const aemUtils = await new AEMPageUtilities(browsers, pagePath);
-      console.log(aemUtils.browsers);
+      aemUtils = await new AEMPageUtilities(browsers, pagePath);
+      // console.log(aemUtils.browsers);
 
       // for (const index in aemUtils.browsers) {
       //   let browser = browsers[index];
@@ -48,19 +49,20 @@ describe(
       await page.close();
     });
 
-    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserType, data[0]]))(
+    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of Page List with badge Icon in %s for %s',
-      async (label, browser, rendition) => {
-        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browser, rendition.height, rendition.width);
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
         const cssSelector = '#social-links';
 
-        // const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
-        // const element = await resizedPage.$wait(cssSelector);
+        page = await aemUtils.getPage(browserName);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$wait(cssSelector);
 
-        // console.log(await element.boundingBox());
-        // const image = await element.screenshot();
-        // expect(image).toMatchImageSnapshot();
-        expect(true).toBe(true);
+        console.log(await element.boundingBox());
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+        // expect(true).toBe(true);
       },
       timeout,
     );
