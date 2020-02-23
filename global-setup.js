@@ -7,7 +7,7 @@ const mkdirp = require('mkdirp');
 const os = require('os');
 const path = require('path');
 
-const DIR = path.join('/Users/stewartleach', 'jest_playwright_global_setup');
+const DIR = path.join(os.tmpdir(), 'jest_playwright_global_setup');
 
 module.exports = async () => {
   console.log(chalk.green('Setup Playwright'));

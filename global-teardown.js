@@ -6,7 +6,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const DIR = path.join('/Users/stewartleach', 'jest_playwright_global_setup');
+const DIR = path.join(os.tmpdir(), 'jest_playwright_global_setup');
 
 module.exports = async () => {
   console.log(chalk.green('Teardown playwright'));
