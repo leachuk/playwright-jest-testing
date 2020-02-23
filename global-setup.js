@@ -14,18 +14,20 @@ module.exports = async () => {
 
   const chromiumBrowserApp = await playwright.chromium.launchServer();
   const firefoxBrowserApp = await playwright.firefox.launchServer();
+  const webkitBrowserApp = await playwright.firefox.launchServer();
 
   global.__BROWSER_GLOBAL__ = {};
   global.__BROWSER_GLOBAL__.chromium = chromiumBrowserApp;
   global.__BROWSER_GLOBAL__.firefox = firefoxBrowserApp;
-  // global.__BROWSER_GLOBAL__.webkit = webkitBrowserApp;
+  global.__BROWSER_GLOBAL__.webkit = webkitBrowserApp;
 
   // Expose the connection details via file system to be used in tests
   mkdirp.sync(DIR);
-  console.log('wsEnpointChromium:'+ chromiumBrowserApp.wsEndpoint());
-  console.log('wsEnpointFirefox:'+ firefoxBrowserApp.wsEndpoint());
+  console.log('wsEndpointChromium:'+ chromiumBrowserApp.wsEndpoint());
+  console.log('wsEndpointFirefox:'+ firefoxBrowserApp.wsEndpoint());
+  console.log('wsEndpointWebkit:'+ webkitBrowserApp.wsEndpoint());
 
   fs.writeFileSync(path.join(DIR, 'wsEndpointChromium'), chromiumBrowserApp.wsEndpoint());
   fs.writeFileSync(path.join(DIR, 'wsEndpointFirefox'), firefoxBrowserApp.wsEndpoint());
-  // fs.writeFileSync(path.join(DIR, 'wsEndpoint'), webkitBrowserApp.wsEndpoint());
+  fs.writeFileSync(path.join(DIR, 'wsEndpointWebkit'), webkitBrowserApp.wsEndpoint());
 };
