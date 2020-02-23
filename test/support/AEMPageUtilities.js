@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 const options = {
@@ -14,20 +16,35 @@ const options = {
 const args = require('minimist')(process.argv.slice(2), options);
 
 class AEMPageUtilities {
-  constructor(browser, path) {
-    this.path = path;
-    this.browser = browser;
-    this.context = null;
-    this.argv = args;
-    this.options = {
-      scheme: args.scheme,
-      hostname: args.hostname,
-      port: args.port,
-      isAuthor: args.isAuthor,
-      isWcmModeDisabled: args.isWcmModeDisabled,
-      username: args.username,
-      password: args.password,
-    };
+  constructor(browsers, path) {
+    return (async () => {
+      this.path = path;
+      this.browsers = [{}];
+      this.context = null;
+      this.argv = args;
+      this.options = {
+        scheme: args.scheme,
+        hostname: args.hostname,
+        port: args.port,
+        isAuthor: args.isAuthor,
+        isWcmModeDisabled: args.isWcmModeDisabled,
+        username: args.username,
+        password: args.password,
+      };
+      Object.assign(this.browsers, [{ browserName: 'chromium', browserType: null, page: null }], browsers);
+      // All async code here
+      await AEMPageUtilities.initPages(this.browsers, this.path, this.options);
+
+      return this; // when done
+    })();
+  }
+
+  set browsers(browsers) {
+    this._browsers = browsers;
+  }
+
+  get browsers() {
+    return this._browsers;
   }
 
   set scheme(scheme) {
@@ -94,21 +111,35 @@ class AEMPageUtilities {
     return this.setupPath();
   }
 
-  setupHostname() {
-    let hostname = `${this.scheme}://${this.hostname}`;
-    if (typeof this.port !== 'undefined') {
-      hostname = `${this.scheme}://${this.hostname}:${this.port}`;
+  static setupHostname(optionsIn) {
+    // if (typeof this.scheme === 'undefined' || typeof this.hostname === 'undefined' || typeof this.port === 'undefined') {
+    //   const scheme = args.scheme;
+    //   const hostname = args.hostname;
+    //   const port = args.port;
+    // } else {
+    //   const scheme = this.scheme;
+    //   const hostname = this.hostname;
+    //   const port = this.port;
+    // }
+    let host = `${optionsIn.scheme}://${optionsIn.hostname}`;
+    if (typeof port !== 'undefined') {
+      host = `${optionsIn.scheme}://${optionsIn.hostname}:${optionsIn.port}`;
     }
-    return hostname;
+    return host;
   }
 
-  setupPath() {
-    const url = this.setupHostname();
-    console.log(`this.isWcmModeDisabled:${this.isWcmModeDisabled}`);
-    if (typeof this.isWcmModeDisabled !== 'undefined' && this.isWcmModeDisabled === true) {
-      return `${url}${this.path}?wcmmode=disabled`;
+  static setupPath(path, optionsIn) {
+    // if (typeof options.setupHostname === 'undefined' || typeof options.isWcmModeDisabled === 'undefined') {
+    //   const isWcmModeDisabled = args.isWcmModeDisabled;
+    // } else {
+    //   const isWcmModeDisabled = this.isWcmModeDisabled;
+    // }
+    const url = AEMPageUtilities.setupHostname(optionsIn);
+    console.log(`optionsIn.isWcmModeDisabled:${optionsIn.isWcmModeDisabled}`);
+    if (typeof optionsIn.isWcmModeDisabled !== 'undefined' && optionsIn.isWcmModeDisabled === true) {
+      return `${url}${path}?wcmmode=disabled`;
     }
-    return `${url}${this.path}`;
+    return `${url}${path}`;
   }
 
   static async setViewportSize(page, rendition) {
@@ -134,47 +165,99 @@ class AEMPageUtilities {
     return false;
   }
 
-  async getPage() {
-    this.context = await this.browser.newContext();
-    // const path = await aemUtils.getPath();
-    const page = await this.context.newPage();
-    await page.goto(this.setupPath());
-    console.log(`page.url():${page.url()}`);
-    // page.screenshot({ path: 'testingScreenshot.png' });
-    // const found = await page.$('text="Welcome to Adobe Experience Manager"');
-    if (await AEMPageUtilities.isAemLogin(page)) {
-      let loginUrl = '';
-      // todo: need to handle authenticating to author instance via form
-      // trying with basic auth in the url redirects to the login page
-      if (typeof this.port !== 'undefined') {
-        loginUrl = `${this.scheme}://${this.hostname}:${this.port}/libs/granite/core/content/login.html`;
-      } else {
-        loginUrl = `${this.scheme}://${this.hostname}/libs/granite/core/content/login.html`;
-      }
-      console.log(`loginUrl:${loginUrl}`);
-      // const loginPage = await this.context.newPage(loginUrl);
-      console.log('got loginPage');
-      // await page.screenshot({ path: './preloginscreenshot.png' });
-      await page.type('#username', this.username);
-      await page.type('#password', this.password);
-      // await page.screenshot({ path: './pre1loginscreenshot.png' });
-      await page.click('#submit-button');
-      // await page.waitForNavigation({ waitUntil: 'load' });
-      console.log('clicked loginPage');
-      // await page.screenshot({ path: './pre2loginscreenshot.png' });
-      // await Promise.all([
-      //   page.click('#submit-button'),
-      //   page.waitForNavigation({ waitUntil: 'load' }),
-      //   console.log('clicked loginPage'),
-      //   page.screenshot({ path: './pre2loginscreenshot.png' }),
-      // ]);
-      // await page.screenshot({ path: './pre3loginscreenshot.png' });
-      console.log(`setupPath:${this.setupPath()}`);
-      // await page.screenshot({ path: './postloginscreenshot.png' });
-      // return page;
+  static async initPages(browsers, setupPath, optionsIn) {
+    console.log('initPages()...');
+
+    for (const index in browsers) {
+      console.log(`......X:${index}`);
+      const context = await browsers[index].browserType.newContext();
+      // const path = await aemUtils.getPath();
+      const page = await context.newPage();
+      console.log(AEMPageUtilities.setupPath(setupPath, optionsIn));
+      // await page.goto(setupPath);
+      // console.log(`page.url():${page.url()}`);
+      // // page.screenshot({ path: 'testingScreenshot.png' });
+      // // const found = await page.$('text="Welcome to Adobe Experience Manager"');
+      // if (await AEMPageUtilities.isAemLogin(page)) {
+      //   let loginUrl = '';
+      //   // todo: need to handle authenticating to author instance via form
+      //   // trying with basic auth in the url redirects to the login page
+      //   if (typeof this.port !== 'undefined') {
+      //     loginUrl = `${this.scheme}://${this.hostname}:${this.port}/libs/granite/core/content/login.html`;
+      //   } else {
+      //     loginUrl = `${this.scheme}://${this.hostname}/libs/granite/core/content/login.html`;
+      //   }
+      //   console.log(`loginUrl:${loginUrl}`);
+      //   // const loginPage = await this.context.newPage(loginUrl);
+      //   console.log('got loginPage');
+      //   // await page.screenshot({ path: './preloginscreenshot.png' });
+      //   await page.type('#username', this.username);
+      //   await page.type('#password', this.password);
+      //   // await page.screenshot({ path: './pre1loginscreenshot.png' });
+      //   await page.click('#submit-button');
+      //   // await page.waitForNavigation({ waitUntil: 'load' });
+      //   console.log('clicked loginPage');
+      //   // await page.screenshot({ path: './pre2loginscreenshot.png' });
+      //   // await Promise.all([
+      //   //   page.click('#submit-button'),
+      //   //   page.waitForNavigation({ waitUntil: 'load' }),
+      //   //   console.log('clicked loginPage'),
+      //   //   page.screenshot({ path: './pre2loginscreenshot.png' }),
+      //   // ]);
+      //   // await page.screenshot({ path: './pre3loginscreenshot.png' });
+      //   console.log(`setupPath:${this.setupPath()}`);
+      //   // await page.screenshot({ path: './postloginscreenshot.png' });
+      //   // return page;
+      // }
+      // await page.screenshot({ path: 'standardscreenshot.png' });
+      browsers[index].page = page;
     }
-    // await page.screenshot({ path: 'standardscreenshot.png' });
-    return page;
+    // console.log(browsers);
+  }
+
+  async getPage(getBrowser) {
+    const result = this.browsers.filter((x) => x.browserName === getBrowser);
+    console.log(result);
+    // this.context = await this.browser[browserName].newContext();
+    // // const path = await aemUtils.getPath();
+    // const page = await this.context.newPage();
+    // await page.goto(this.setupPath());
+    // console.log(`page.url():${page.url()}`);
+    // // page.screenshot({ path: 'testingScreenshot.png' });
+    // // const found = await page.$('text="Welcome to Adobe Experience Manager"');
+    // if (await AEMPageUtilities.isAemLogin(page)) {
+    //   let loginUrl = '';
+    //   // todo: need to handle authenticating to author instance via form
+    //   // trying with basic auth in the url redirects to the login page
+    //   if (typeof this.port !== 'undefined') {
+    //     loginUrl = `${this.scheme}://${this.hostname}:${this.port}/libs/granite/core/content/login.html`;
+    //   } else {
+    //     loginUrl = `${this.scheme}://${this.hostname}/libs/granite/core/content/login.html`;
+    //   }
+    //   console.log(`loginUrl:${loginUrl}`);
+    //   // const loginPage = await this.context.newPage(loginUrl);
+    //   console.log('got loginPage');
+    //   // await page.screenshot({ path: './preloginscreenshot.png' });
+    //   await page.type('#username', this.username);
+    //   await page.type('#password', this.password);
+    //   // await page.screenshot({ path: './pre1loginscreenshot.png' });
+    //   await page.click('#submit-button');
+    //   // await page.waitForNavigation({ waitUntil: 'load' });
+    //   console.log('clicked loginPage');
+    //   // await page.screenshot({ path: './pre2loginscreenshot.png' });
+    //   // await Promise.all([
+    //   //   page.click('#submit-button'),
+    //   //   page.waitForNavigation({ waitUntil: 'load' }),
+    //   //   console.log('clicked loginPage'),
+    //   //   page.screenshot({ path: './pre2loginscreenshot.png' }),
+    //   // ]);
+    //   // await page.screenshot({ path: './pre3loginscreenshot.png' });
+    //   console.log(`setupPath:${this.setupPath()}`);
+    //   // await page.screenshot({ path: './postloginscreenshot.png' });
+    //   // return page;
+    // }
+    // // await page.screenshot({ path: 'standardscreenshot.png' });
+    // return page;
   }
 }
 
