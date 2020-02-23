@@ -15,10 +15,10 @@ describe(
     const pagePath = '/content/swinburne-site-showcase/en/styleguide/components/page-list.html';
 
     beforeAll(async () => {
-      const browser = await global.__CHROMIUMBROWSER__;
-      console.log('browser isConnected():' + browser.isConnected());
+      const browserChromium = await global.__FIREFOXBROWSER__;
+      console.log('browser isConnected():' + browserChromium.isConnected());
       // // const browser = await global.__FIREFOXBROWSER__;
-      const aemUtils = new AEMPageUtilities(browser, pagePath);
+      const aemUtils = new AEMPageUtilities(browserChromium, pagePath);
 
       page = await aemUtils.getPage();
     }, timeout);

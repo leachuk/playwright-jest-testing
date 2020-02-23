@@ -11,10 +11,10 @@ const DIR = path.join(os.tmpdir(), 'jest_playwright_global_setup');
 module.exports = async () => {
   console.log(chalk.green('Teardown playwright'));
   const chromiumBrowserApp = await global.__BROWSER_GLOBAL__.chromium;
-  // const firefoxBrowserApp = await global.__BROWSER_GLOBAL__.firefox;
+  const firefoxBrowserApp = await global.__BROWSER_GLOBAL__.firefox;
   // const webBrowskiterApp = await global.__BROWSER_GLOBAL__.webkit;
-  chromiumBrowserApp.close();
-  // firefoxBrowserApp.close();
+  await chromiumBrowserApp.close();
+  await firefoxBrowserApp.close();
   // webBrowskiterApp.close();
   rimraf.sync(DIR);
 };

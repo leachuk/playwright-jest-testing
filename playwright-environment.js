@@ -18,7 +18,7 @@ class PlaywrightEnvironment extends NodeEnvironment {
     console.log(chalk.yellow('Setup Test Environment.'));
     await super.setup();
     const wsEndpointChromium = fs.readFileSync(path.join(DIR, 'wsEndpointChromium'), 'utf8');
-    // const wsEndpointFirefox = fs.readFileSync(path.join(DIR, 'wsEndpointFirefox'), 'utf8');
+    const wsEndpointFirefox = fs.readFileSync(path.join(DIR, 'wsEndpointFirefox'), 'utf8');
     // if (!wsEndpointChromium) {
     //   throw new Error('wsEndpoint not found');
     // }
@@ -38,7 +38,7 @@ class PlaywrightEnvironment extends NodeEnvironment {
 
     // Use connect options later to establish a connection.
     this.global.__CHROMIUMBROWSER__ = await playwright.chromium.connect({ wsEndpoint: wsEndpointChromium });
-    // this.global.__FIREFOXBROWSER__ = await playwright.firefox.connect(firefoxConnectOptions);
+    this.global.__FIREFOXBROWSER__ = await playwright.firefox.connect({ wsEndpoint: wsEndpointFirefox });
     // this.global.__WEBKITBROWSER__ = await playwright.webkit.connect(webkitConnectOptions);
   }
 
