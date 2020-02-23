@@ -22,19 +22,6 @@ class PlaywrightEnvironment extends NodeEnvironment {
     // if (!wsEndpointChromium) {
     //   throw new Error('wsEndpoint not found');
     // }
-    // const chromiumBrowserApp = await playwright.chromium.launchBrowserApp({ webSocket: true });
-    // const firefoxBrowserApp = await playwright.firefox.launchBrowserApp({ webSocket: true });
-    // const webkitBrowserApp = await playwright.webkit.launchBrowserApp({ webSocket: true });
-
-    // const chromiumConnectOptions = chromiumBrowserApp.connectOptions({
-    //   browserWSEndpoint: wsEndpointChromium,
-    // });
-    // const firefoxConnectOptions = firefoxBrowserApp.connectOptions({
-    //   browserWSEndpoint: wsEndpointFirefox,
-    // });
-    // const webkitConnectOptions = webkitBrowserApp.connectOptions({
-    //   browserWSEndpoint: wsEndpoint,
-    // });
 
     // Use connect options later to establish a connection.
     this.global.__CHROMIUMBROWSER__ = await playwright.chromium.connect({ wsEndpoint: wsEndpointChromium });
