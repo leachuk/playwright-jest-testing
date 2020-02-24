@@ -13,7 +13,7 @@ class DefaultTestSetup {
       context: {
         viewport: {
           width: 400,
-          height: 600,
+          height: 1000,
           deviceScaleFactor: 1,
         },
       },

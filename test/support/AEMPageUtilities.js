@@ -135,11 +135,10 @@ class AEMPageUtilities {
   static async setViewportSize(page, rendition) {
     const bodyHandle = await page.$wait('body');
     const boundingBox = await bodyHandle.boundingBox();
-    console.log(await bodyHandle.boundingBox());
-    console.log(`resized width:${rendition.width}, resized height:${Math.max(rendition.height, Math.ceil(boundingBox.height))}`);
+    console.log(`resized width:${rendition.width}, resized height:${Math.ceil(boundingBox.height)}`);
     await page.setViewportSize({
       width: rendition.width,
-      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
+      height: Math.ceil(boundingBox.height + 1000), // no idea why this magic number is needed to prevent some white screenshots
     });
     return page;
   }

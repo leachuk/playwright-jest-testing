@@ -46,11 +46,8 @@ describe(
         const cssSelector = '#social-links';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -64,11 +61,8 @@ describe(
         const cssSelector = '#pagelist_default_links';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -82,11 +76,8 @@ describe(
         const cssSelector = '#reference_OXHFFXJJE #pagelist_36a';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -100,11 +91,8 @@ describe(
         const cssSelector = '#reference_1XHFFXJJE #pagelist_36b';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -118,11 +106,8 @@ describe(
         const cssSelector = '#reference_2XHFFXJJE #pagelist_36a';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -136,11 +121,8 @@ describe(
         const cssSelector = '#reference_4XHFFXJJE #pagelist_36a';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -154,11 +136,8 @@ describe(
         const cssSelector = '#reference_5XHFFXJJE #pagelist_36b';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -172,11 +151,8 @@ describe(
         const cssSelector = '#pagelist37';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -190,11 +166,8 @@ describe(
         const cssSelector = '#contentblock_pagelist_pagedetails_badge_image_title_desc_action_pagelist';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -208,11 +181,8 @@ describe(
         const cssSelector = '#pagelist_column';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -226,11 +196,8 @@ describe(
         const cssSelector = '#pagelist_column_3';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -244,28 +211,21 @@ describe(
         const cssSelector = '#contentblock_pagelist_pagedetails_card_background_pagelist';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
       timeout,
     );
 
-    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of 1 notification in %s for %s',
       async (label, browserName, rendition) => {
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
         const cssSelector = '#pagelist_notification_1';
 
         page = await aemUtils.getPage(browserName);
-        // await page.setViewportSize({
-        //   width: rendition.width,
-        //   height: rendition.height,
-        // });
         const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
         const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
@@ -281,11 +241,8 @@ describe(
         const cssSelector = '#pagelist_notification_2';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -299,11 +256,8 @@ describe(
         const cssSelector = '#pagelist_notification_3';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -317,11 +271,8 @@ describe(
         const cssSelector = '#pagelist_testimonial_online_media';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -335,11 +286,8 @@ describe(
         const cssSelector = '#pagelist_testimonial_online_media_custom_image';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -353,12 +301,9 @@ describe(
         const cssSelector = '#card_title_subtitle_description_action';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
         await page.waitFor(200);
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -372,11 +317,8 @@ describe(
         const cssSelector = '#pagelist_testimonial_image';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -390,11 +332,8 @@ describe(
         const cssSelector = '#pagelist_testimonial_text_only';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -408,11 +347,8 @@ describe(
         const cssSelector = '#pagelist_testimonial_text_only_without_subtitle';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -426,11 +362,8 @@ describe(
         const cssSelector = '#pagelist_pagedetails_clickable_card_icon_title';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
@@ -444,11 +377,8 @@ describe(
         const cssSelector = '#pagelist_action_default_with_arrow';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: 300, // no idea why, but this is necessary to prevent an only white image. Maybe due to being at the end of the page.
-        });
-        const element = await page.$(cssSelector);
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
