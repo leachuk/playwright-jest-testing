@@ -434,25 +434,6 @@ describe(
     );
 
     test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
-      'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s for %s',
-      async (label, browserName, rendition) => {
-        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
-        const cssSelector = '#card_title_subtitle_description_action';
-
-        page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        await page.waitFor(200);
-        const element = await page.$(cssSelector);
-        const image = await element.screenshot();
-        expect(image).toMatchImageSnapshot();
-      },
-      timeout,
-    );
-
-    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of cards with action default with arrow in %s for %s',
       async (label, browserName, rendition) => {
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
