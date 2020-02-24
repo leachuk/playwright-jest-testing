@@ -18,6 +18,7 @@ describe(
     beforeAll(async () => {
       const browserChromium = await global.__CHROMIUMBROWSER__;
       const browserFirefox = await global.__FIREFOXBROWSER__;
+      const browserWebkit = await global.__WEBKITBROWSER__;
       const browsers = [
         { browserName: 'chromium', browser: browserChromium, page: null },
         { browserName: 'firefox', browser: browserFirefox, page: null },
