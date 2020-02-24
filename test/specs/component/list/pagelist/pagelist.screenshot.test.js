@@ -22,6 +22,7 @@ describe(
       const browsers = [
         { browserName: 'chromium', browser: browserChromium, page: null },
         { browserName: 'firefox', browser: browserFirefox, page: null },
+        { browserName: 'webkit', browser: browserWebkit, page: null },
       ];
 
       aemUtils = await new AEMPageUtilities(browsers, pagePath);

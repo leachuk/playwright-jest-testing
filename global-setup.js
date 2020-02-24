@@ -14,7 +14,7 @@ module.exports = async () => {
 
   const chromiumBrowserApp = await playwright.chromium.launchServer();
   const firefoxBrowserApp = await playwright.firefox.launchServer();
-  const webkitBrowserApp = await playwright.firefox.launchServer();
+  const webkitBrowserApp = await playwright.webkit.launchServer();
 
   global.__BROWSER_GLOBAL__ = {};
   global.__BROWSER_GLOBAL__.chromium = chromiumBrowserApp;
