@@ -15,6 +15,7 @@ const options = {
   },
 };
 const args = require('minimist')(process.argv.slice(2), options);
+const DefaultTestSetup = require('../DefaultTestSetup');
 
 class AEMPageUtilities {
   constructor(browsers, path) {
@@ -131,6 +132,18 @@ class AEMPageUtilities {
     return `${url}${path}`;
   }
 
+  static async setViewportSize(page, rendition) {
+    const bodyHandle = await page.$wait('body');
+    const boundingBox = await bodyHandle.boundingBox();
+    console.log(await bodyHandle.boundingBox());
+    console.log(`resized width:${rendition.width}, resized height:${Math.max(rendition.height, Math.ceil(boundingBox.height))}`);
+    await page.setViewportSize({
+      width: rendition.width,
+      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
+    });
+    return page;
+  }
+
   static async isAemLogin(page) {
     const found = await page.content();
     if (found.includes('QUICKSTART_HOMEPAGE')) {
@@ -142,12 +155,13 @@ class AEMPageUtilities {
   }
 
   static async initPages(browsers, setupPath, optionsIn) {
+    const { browserContext } = new DefaultTestSetup();
+    const browserUpdateWithPage = browsers;
     console.log('initPages()...');
     console.log(optionsIn);
-    const browserUpdateWithPage = browsers;
 
     for (const index in browserUpdateWithPage) {
-      const context = await browsers[index].browser.newContext();
+      const context = await browsers[index].browser.newContext(browserContext);
       const page = await context.newPage();
       await page.goto(AEMPageUtilities.setupPath(setupPath, optionsIn));
       console.log(`page.url():${page.url()}`);

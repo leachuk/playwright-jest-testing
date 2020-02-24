@@ -24,8 +24,11 @@ describe(
         { browserName: 'firefox', browser: browserFirefox, page: null },
         { browserName: 'webkit', browser: browserWebkit, page: null },
       ];
+      const chromeBrowser = [
+        { browserName: 'chromium', browser: browserChromium, page: null },
+      ];
 
-      aemUtils = await new AEMPageUtilities(browsers, pagePath);
+      aemUtils = await new AEMPageUtilities(chromeBrowser, pagePath);
       // for (const index in aemUtils.browsers) {
       //   let browser = browsers[index];
       //   console.log(browser);
@@ -252,18 +255,19 @@ describe(
       timeout,
     );
 
-    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of 1 notification in %s for %s',
       async (label, browserName, rendition) => {
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
         const cssSelector = '#pagelist_notification_1';
 
         page = await aemUtils.getPage(browserName);
-        await page.setViewportSize({
-          width: rendition.width,
-          height: rendition.height,
-        });
-        const element = await page.$(cssSelector);
+        // await page.setViewportSize({
+        //   width: rendition.width,
+        //   height: rendition.height,
+        // });
+        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },
