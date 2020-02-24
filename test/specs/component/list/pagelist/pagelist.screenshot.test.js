@@ -301,8 +301,8 @@ describe(
         const cssSelector = '#card_title_subtitle_description_action';
 
         page = await aemUtils.getPage(browserName);
-        await page.waitFor(200);
         const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
+        await resizedPage.waitFor(200);
         const element = await resizedPage.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
@@ -376,9 +376,13 @@ describe(
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
         const cssSelector = '#pagelist_action_default_with_arrow';
 
+        const fixedRendition = {
+          width: rendition.width,
+          height: 20000,
+        };
         page = await aemUtils.getPage(browserName);
-        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
-        const element = await resizedPage.$(cssSelector);
+        await page.setViewportSize(fixedRendition);
+        const element = await page.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
       },

@@ -138,7 +138,7 @@ class AEMPageUtilities {
     console.log(`resized width:${rendition.width}, resized height:${Math.ceil(boundingBox.height)}`);
     await page.setViewportSize({
       width: rendition.width,
-      height: Math.ceil(boundingBox.height + 1000), // no idea why this magic number is needed to prevent some white screenshots
+      height: Math.ceil(boundingBox.height + 2000), // no idea why this magic number is needed to prevent some white
     });
     return page;
   }
