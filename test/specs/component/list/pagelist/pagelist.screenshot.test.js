@@ -43,13 +43,13 @@ describe(
         const cssSelector = '#social-links';
 
         page = await aemUtils.getPage(browserName);
-        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
-        const element = await resizedPage.$wait(cssSelector);
-
-        console.log(await element.boundingBox());
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
         const image = await element.screenshot();
         expect(image).toMatchImageSnapshot();
-        // expect(true).toBe(true);
       },
       timeout,
     );

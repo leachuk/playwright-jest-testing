@@ -131,17 +131,6 @@ class AEMPageUtilities {
     return `${url}${path}`;
   }
 
-  static async setViewportSize(page, rendition) {
-    const bodyHandle = await page.$wait('body');
-    const boundingBox = await bodyHandle.boundingBox();
-    console.log(`resized width:${Math.max(rendition.width, Math.ceil(boundingBox.width))}, resized height:${Math.max(rendition.height, Math.ceil(boundingBox.height))}`);
-    await page.setViewportSize({
-      width: rendition.width,
-      height: Math.max(rendition.height, Math.ceil(boundingBox.height)),
-    });
-    return page;
-  }
-
   static async isAemLogin(page) {
     const found = await page.content();
     if (found.includes('QUICKSTART_HOMEPAGE')) {
@@ -175,9 +164,12 @@ class AEMPageUtilities {
         await page.type('#username', optionsIn.username);
         await page.type('#password', optionsIn.password);
         // await page.screenshot({ path: './pre1loginscreenshot.png' });
-        await page.click('#submit-button');
-        // await page.waitForNavigation({ waitUntil: 'load' });
-        console.log('clicked loginPage');
+        await Promise.all([
+          page.click('#submit-button'),
+          console.log(`[${browsers[index].browserName}]clicked loginPage`),
+          page.waitForNavigation({ waitUntil: 'load' }),
+          console.log(`[${browsers[index].browserName}]login navigation completed`),
+        ]);
         // await page.screenshot({ path: './pre2loginscreenshot.png' });
       }
       browserUpdateWithPage[index].page = page;

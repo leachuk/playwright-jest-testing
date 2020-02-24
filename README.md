@@ -13,8 +13,8 @@ By default this project should follow the [AirBnB Styleguide](https://github.com
 - [x] Integrate with Jest testing report framework
 - [x] Handle AEM specific requirements like setting `wcmmode=disabled` and login to author instances.
 - [x] Duplicate the existing AEMDesign PageDetailsScreenshot test and compare running time
-- [ ] Add ability to test with multi browser types (chromium, firefox or webkit)
-  - WIP. Multi browsers can now be added via the setup Json, but Firefox element height is defaulting to 0 intermitently 
+- [x] Add ability to test with multi browser types (chromium, firefox or webkit)
+  - ~~WIP. Multi browsers can now be added via the setup Json, but Firefox element height is defaulting to 0 intermitently.~~ Fixed. Caused by in progress login page redirection. 
 - [ ] Speed up tests by getting them to run in parrallel. See something like [puppeteer cluster](https://github.com/thomasdondorf/puppeteer-cluster) as an example.
 - [x] Convert to yarn from npm.
 - [ ] Integrate Jests snapshots to test html structure of components. This will remove the need to write tests looking for specific node structures.
