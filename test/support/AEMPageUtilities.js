@@ -167,7 +167,7 @@ class AEMPageUtilities {
         await Promise.all([
           page.click('#submit-button'),
           console.log(`[${browsers[index].browserName}]clicked loginPage`),
-          page.waitForNavigation({ waitUntil: 'load' }),
+          page.waitForNavigation({ waitUntil: 'networkidle0' }),
           console.log(`[${browsers[index].browserName}]login navigation completed`),
         ]);
         // await page.screenshot({ path: './pre2loginscreenshot.png' });

@@ -36,7 +36,7 @@ describe(
       await page.close();
     });
 
-    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of Page List with badge Icon in %s for %s',
       async (label, browserName, rendition) => {
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
@@ -54,327 +54,421 @@ describe(
       timeout,
     );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Default in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_AIQY5ZRKO #pagelist_default_links';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Default in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_default_links';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : default background in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_OXHFFXJJE #pagelist_36a';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : default background in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#reference_OXHFFXJJE #pagelist_36a';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : default background with charcoal theme in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_1XHFFXJJE #pagelist_36b';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : default background with charcoal theme in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#reference_1XHFFXJJE #pagelist_36b';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : grey background in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_2XHFFXJJE #pagelist_36a';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : grey background in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#reference_2XHFFXJJE #pagelist_36a';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : yellow background in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_4XHFFXJJE #pagelist_36a';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : yellow background in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#reference_4XHFFXJJE #pagelist_36a';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : grey background with charcoal theme in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_5XHFFXJJE #pagelist_36b';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Image Tag Title and Action Promoted : grey background with charcoal theme in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#reference_5XHFFXJJE #pagelist_36b';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Default : Horizontal links in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#reference_COQK8HAL9 #pagelist37';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Default : Horizontal links in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist37';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Page details with Image, Title, Description and Action in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#contentblock_pagelist_pagedetails_badge_image_title_desc_action_pagelist';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Page details with Image, Title, Description and Action in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#contentblock_pagelist_pagedetails_badge_image_title_desc_action_pagelist';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Image, Title, Description and Action : Column in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_column';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Image, Title, Description and Action : Column in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_column';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Image, Title, Description and Action : Column 3 in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_column_3';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Image, Title, Description and Action : Column 3 in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_column_3';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Image, Sub Title, Title, Description and Action in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#contentblock_pagelist_pagedetails_card_background_pagelist';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Image, Sub Title, Title, Description and Action in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#contentblock_pagelist_pagedetails_card_background_pagelist';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of 1 notification in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_notification_1';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of 1 notification in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_notification_1';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of 2 notifications in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_notification_2';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of 2 notifications in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_notification_2';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of 3 notifications in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_notification_3';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of 3 notifications in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_notification_3';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List Testimonial Card with Online Media in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_testimonial_online_media';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List Testimonial Card with Online Media in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_online_media';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List Testimonial Card with Online Media and Custom Image in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_testimonial_online_media_custom_image';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List Testimonial Card with Online Media and Custom Image in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_online_media_custom_image';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#card_title_subtitle_description_action';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#card_title_subtitle_description_action';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        await page.waitFor(200);
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List Testimonial Card with Image in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_testimonial_image';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List Testimonial Card with Image in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_image';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List Testimonial Card with Subtitle in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_testimonial_text_only';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List Testimonial Card with Subtitle in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_text_only';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List Testimonial Card without Subtitle in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_testimonial_text_only_without_subtitle';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List Testimonial Card without Subtitle in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_testimonial_text_only_without_subtitle';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Clickable cards with icon and title in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_pagedetails_clickable_card_icon_title';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Clickable cards with icon and title in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_pagedetails_clickable_card_icon_title';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#card_title_subtitle_description_action';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of Page List with badge Card with Title, Subtitle, Description and Action in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#card_title_subtitle_description_action';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: rendition.height,
+        });
+        await page.waitFor(200);
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
 
-    // test.each(browserRenditions.map((data) => [data[0].label, data[0]]))(
-    //   'Appearance of cards with action default with arrow in %s',
-    //   async (label, rendition) => {
-    //     console.log('label:%s ,height:%i ,width:%i', label, rendition.height, rendition.width);
-    //     const cssSelector = '#pagelist_action_default_with_arrow';
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+      'Appearance of cards with action default with arrow in %s for %s',
+      async (label, browserName, rendition) => {
+        console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
+        const cssSelector = '#pagelist_action_default_with_arrow';
 
-    //     page = await AEMPageUtilities.setViewportSize(page, rendition);
-    //     const element = await page.$(cssSelector);
-    //     const image = await element.screenshot();
-    //     expect(image).toMatchImageSnapshot();
-    //   },
-    //   timeout,
-    // );
+        page = await aemUtils.getPage(browserName);
+        await page.setViewportSize({
+          width: rendition.width,
+          height: 300, // no idea why, but this is necessary to prevent an only white image. Maybe due to being at the end of the page.
+        });
+        const element = await page.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
+      },
+      timeout,
+    );
   },
   timeout,
 );

@@ -21,7 +21,7 @@ if (!fs.existsSync(screenshotDir)) {
       },
     });
     const page = await context.newPage();
-    await page.goto('https://www.swinburne.edu.au/study/life/why-choose-swinburne/');
+    await page.goto('https://www.swinburne.edu.au/study/life/why-choose-swinburne/')
     const element = await page.$wait('body > div.l-wrapper.l-wrapper--main > section');
 
     await element.screenshot({ path: `${screenshotDir}/example-${browserType}.png` });

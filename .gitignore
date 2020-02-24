@@ -109,4 +109,4 @@ dist
 #app specific ignores
 screenshots
 jest-stare/
-**/__diff_output__
+**/__image_snapshots__
