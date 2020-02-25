@@ -180,7 +180,7 @@ class AEMPageUtilities {
         await Promise.all([
           page.click('#submit-button'),
           console.log(`[${browsers[index].browserName}]clicked loginPage`),
-          page.waitForNavigation({ waitUntil: 'load' }),
+          page.waitForNavigation({ waitUntil: 'networkidle0' }),
           console.log(`[${browsers[index].browserName}]login navigation completed`),
         ]);
         // await page.screenshot({ path: './pre2loginscreenshot.png' });
@@ -191,9 +191,9 @@ class AEMPageUtilities {
   }
 
   async getPage(browserNameIn) {
-    const result = this.browsers.filter((x) => x.browserName === browserNameIn);
+    const browser = this.browsers.filter((x) => x.browserName === browserNameIn);
     // console.log(`getPage(${result[0].browserName})`);
-    return result[0].page;
+    return browser[0].page;
   }
 }
 
