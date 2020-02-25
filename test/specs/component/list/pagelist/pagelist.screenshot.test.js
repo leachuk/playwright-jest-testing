@@ -27,6 +27,9 @@ describe(
       const chromeBrowser = [
         { browserName: 'chromium', browser: browserChromium, page: null },
       ];
+      const firefoxBrowser = [
+        { browserName: 'firefox', browser: browserFirefox, page: null },
+      ];
 
       aemUtils = await new AEMPageUtilities(chromeBrowser, pagePath);
       // for (const index in aemUtils.browsers) {
@@ -264,7 +267,7 @@ describe(
       timeout,
     );
 
-    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of Page List Testimonial Card with Online Media in %s for %s',
       async (label, browserName, rendition) => {
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
@@ -272,14 +275,17 @@ describe(
 
         page = await aemUtils.getPage(browserName);
         const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
-        //const element = await resizedPage.$(cssSelector);
-        await resizedPage.$wait(`${cssSelector} .play-video.btn.btn-primary-yellow`, { visible: true }).then(() => console.log('Video button loaded'));
-        const button = await resizedPage.$(`${cssSelector} .play-video.btn.btn-primary-yellow`);
-        await resizedPage.waitFor(3000);
-        //const image = await element.screenshot();
-        await button.screenshot({ path: `video-button-screenshot-${label}.png`});
-        //expect(image).toMatchImageSnapshot();
-        expect(true).toBe(true);
+        // Remove yellow video buttons which cuase test failures due to loading svg animation
+        // Attempts to wait for the svg selector were not successful, hence this workaround.
+        await page.evaluate((selector) => {
+          const elements = document.querySelectorAll(selector);
+          for (let i = 0; i < elements.length; i++){
+            elements[i].parentNode.removeChild(elements[i]);
+          }
+        }, '.play-video.btn.btn-primary-yellow');
+        const element = await resizedPage.$(cssSelector);
+        const image = await element.screenshot();
+        expect(image).toMatchImageSnapshot();
       },
       timeout,
     );
