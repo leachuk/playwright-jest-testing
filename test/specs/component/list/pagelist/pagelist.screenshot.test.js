@@ -42,16 +42,14 @@ describe(
       await page.close();
     });
 
-    test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
+    test.only.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(
       'Appearance of Page List with badge Icon in %s for %s',
       async (label, browserName, rendition) => {
         console.log('label:%s ,browser:%s ,height:%i ,width:%i', label, browserName, rendition.height, rendition.width);
-        const cssSelector = '#social-links';
 
-        page = await aemUtils.getPage(browserName);
-        const resizedPage = await AEMPageUtilities.setViewportSize(page, rendition);
-        const element = await resizedPage.$(cssSelector);
-        const image = await element.screenshot();
+        const cssSelector = '#social-links';
+        const image = await getElementScreenshot(aemUtils, browserName, rendition, cssSelector);
+
         expect(image).toMatchImageSnapshot();
       },
       timeout,
