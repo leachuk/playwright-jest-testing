@@ -31,7 +31,7 @@ describe(
         { browserName: 'firefox', browser: browserFirefox, page: null },
       ];
 
-      aemUtils = await new AEMPageUtilities(chromeBrowser, pagePath);
+      aemUtils = await new AEMPageUtilities(browsers, pagePath);
       // for (const index in aemUtils.browsers) {
       //   let browser = browsers[index];
       //   console.log(browser);
@@ -39,7 +39,7 @@ describe(
     }, timeout);
 
     afterAll(async () => {
-      await page.close();
+      await aemUtils.closeAllPages();
     });
 
     test.each(browserRenditions.map((data) => [data[0].label, data[0].browserName, data[0]]))(

@@ -195,6 +195,13 @@ class AEMPageUtilities {
     // console.log(`getPage(${result[0].browserName})`);
     return browser[0].page;
   }
+
+  async closeAllPages() {
+    for (const browser of this.browsers) {
+      console.log(`Closing page for ${browser.browserName}`);
+      browser.page.close();
+    }
+  }
 }
 
 module.exports = AEMPageUtilities;
